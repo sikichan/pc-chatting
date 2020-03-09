@@ -1,0 +1,42 @@
+{
+  "name": "pc-chatting",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/sikichan/pc-chatting.git",
+  "author": "sikichan <chenqiqi12138@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --config build/webpack.dev.js --hot",
+    "build:dev": "webpack --config build/webpack.dev.js",
+    "build:prod": "webpack --config build/webpack.prod.js",
+    "build:test": "webpack --config build/webpack.test.js",
+    "build:test2": "webpack --config build/webpack.test2.js",
+    "build:test3": "webpack --config build/webpack.test3.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.4.2",
+    "file-loader": "^5.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "url-loader": "^3.0.0",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.0",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.8.7",
+    "@babel/runtime-corejs3": "^7.8.7",
+    "core-js": "3"
+  }
+}
