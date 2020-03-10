@@ -48,3 +48,8 @@ yarn add --dev @babel/plugin-transform-runtime
 // 配置见 webpack.test2.js babel-loader > options
 app.bundle.js    268 KiB 
 ```
+
+## vue 
+```js
+yarn add vue vue-router vuex
+```

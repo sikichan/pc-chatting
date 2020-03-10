@@ -1,19 +1,12 @@
-// 
-const print = () => {
-  const div = document.createElement('div')
-  div.innerHTML = 'hello pc-chatting'
-  return div
-}
-document.body.appendChild(print())
-const promise4242 = function() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log('resolve!')
-      resolve('success!')
-    }, 1000)
-  })
-}
-promise4242().then(res => console.log('promise returns : ', res))
+import Vue from 'vue'
+import App from './App.vue'
+import VueRouter from 'vue-router'
+import router from './router/index.js'
 
-// @babel/runtime 无法模拟实例上的方法 ，但在core-js@3中可以 polyfill
-console.log((['3', '4'].includes(3)))
+Vue.use(VueRouter)
+
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
+})

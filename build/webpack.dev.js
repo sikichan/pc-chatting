@@ -9,5 +9,34 @@ module.exports = merge(baseConfig, {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true // 开启 CSS Modules
+            }
+          },
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true // 开启 CSS Modules
+            }
+          },
+          'less-loader'
+        ]
+      },
+    ]
   }
 })

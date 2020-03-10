@@ -1,6 +1,5 @@
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path')
 
@@ -12,37 +11,18 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, '../dist')
   },
+  externals: {
+    vue: 'Vue',
+    'vue-router': 'VueRouter'
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '../src'),
+      // 'vue$': path.resolve(__dirname, '../node_modules/vue/dist/vue.runtime.esm.js')
+    }
+  },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [
-          process.env.NODE_ENV !== 'production'  
-          ? 'vue-style-loader'
-          : MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true // 开启 CSS Modules
-            }
-          },
-        ]
-      },
-      {
-        test: /\.less$/,
-        use: [
-          process.env.NODE_ENV !== 'production'  
-          ? 'vue-style-loader'
-          : MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true // 开启 CSS Modules
-            }
-          },
-          'less-loader'
-        ]
-      },
       {
         test: /\.(png|jpe?g|svg|gif)$/,
         use: [
@@ -62,6 +42,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
+        exclude: file => (
+          /(node_modules|bower_components)/.test(file) &&
+          !/\.vue\.js/.test(file)
+          ),
         include: path.resolve(__dirname, '../src'),
         use: [
           {
@@ -90,7 +74,6 @@ module.exports = {
       template: path.resolve(__dirname, '../src/index.html'),
       title: process.env.NODE_ENV
     }),
-    new MiniCssExtractPlugin(),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
   ]
 }
