@@ -6,9 +6,10 @@ module.exports = merge(baseConfig, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, '../dist'),
     compress: true,
-    port: 9000
+    port: 9000,
+    hot: true
   },
   module: {
     rules: [

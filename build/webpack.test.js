@@ -29,8 +29,7 @@ module.exports = merge(baseConfig, {
                   "@babel/preset-env",
                   {
                     "targets": {
-                      // "esmodules": true,
-                      browsers: ["last 20 versions"]
+                      "esmodules": true,
                     },
                     useBuiltIns: 'usage',
                     corejs: 3

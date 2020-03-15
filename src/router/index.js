@@ -1,4 +1,4 @@
-const Home = () => import('../views/Home.vue')
+const Home = () => import(/*webpackChunkName: 'home'*/'../views/Home.vue')
 const router = new VueRouter({
   routes: [
     {

@@ -4,11 +4,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   optimization: {
     splitChunks: {
       chunks: 'all'
-    },
+    }
   },
   module: {
     rules: [
