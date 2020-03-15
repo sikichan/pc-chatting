@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <router-link to="/">HOME
-    </router-link>
-    <router-view></router-view>
+    <router-view/>
   </div>
 </template>
-<script>
-export default {
-  
-}
-</script>
 <style lang="less">
-  #app {
-    background-color: pink;
+  * {
+    margin: 0;
+    outline: none;
+    border: 0;
   }
 </style>

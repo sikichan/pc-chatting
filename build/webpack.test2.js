@@ -21,6 +21,8 @@ module.exports = merge(baseConfig, {
         exclude: /(node_modules|bower_components)/,
         include: path.resolve(__dirname, '../src'),
         use: [
+          // "@babel/runtime": "^7.8.7",
+          // "@babel/runtime-corejs3": "^7.8.7",
           {
             loader: 'babel-loader',
             options: {
