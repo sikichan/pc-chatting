@@ -2,7 +2,14 @@
   <div id="chatting">
     <header>聊天室</header>
     <main>
-      <room class="room"></room>
+      <room class="room">
+        <message :msg="test"></message>
+        <message :isMe="true" :msg="test+'x上飞机为飞机就发我附件为if将诶覅忘记发我if'"></message>
+        <message :msg="test"></message>
+        <message :msg="test"></message>
+        <message :isMe="true" :msg="test+'x上飞机为飞机就发我附件为if将诶覅忘记发我if'"></message>
+        <message :msg="test"></message>
+      </room>
       <list class="online-list"></list>
     </main>
   </div>
@@ -10,11 +17,14 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      test: '周杰伦 双节棍'
+    }
   },
   components: {
     room: () => import('../components/Room.vue'),
-    list: () => import('../components/OnlineList.vue')
+    list: () => import('../components/OnlineList.vue'),
+    message: () => import('../components/Message.vue')
   }
 }
 </script>
