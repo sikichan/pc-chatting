@@ -8,5 +8,6 @@
     margin: 0;
     outline: none;
     border: 0;
+    color: #34495e;
   }
 </style>

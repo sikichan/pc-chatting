@@ -18,7 +18,7 @@ module.exports = merge(baseConfig, {
   watch: true, // 实时编译
   watchOptions: {
     poll: 1000,
-    aggregateTimeout: 500,// 防抖
+    aggregateTimeout: 600,// 防抖
     ignored: /node_modules/ 
   },
   module: {

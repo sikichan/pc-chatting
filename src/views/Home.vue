@@ -1,10 +1,10 @@
 <template>
-  <div id="Home">
+  <div id="home">
     <div class="main">
       <span class="title">Welcome</span>
       <div class="form">
         <input v-model="nickname" placeholder="Enter your nickname">
-        <button>Start</button>
+        <button @click="onStart">Start</button>
       </div>
     </div>
   </div>
@@ -15,11 +15,16 @@ export default {
     return {
       nickname: ''
     }
+  },
+  methods: {
+    onStart() {
+      this.$router.push({path: '/chatting'})
+    }
   }
 }
 </script>
 <style lang="less" scoped>
-  #Home {
+  #home {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -36,48 +41,46 @@ export default {
           font-size: 16px;
           border: 1px solid #efefef;
           border-radius: 6px;
+          color: grey;
         }
         button {
           padding: 10px;
           font-size: 16px;
           border-radius: 6px;
-          background: linear-gradient(to right, #c0392b,#e74c3c,#e67e22);
-          color: transparent;
-          background-clip: text;
           border: 1px solid #e0e0e0;
+          color: #e74c3c;
+          transition: all 0.7s;
           &:hover {
             background: #fefefe;
             color: #16a085;
+            border: 1px solid #16a085;
           }
         }
       }
-      .title {
-        background: linear-gradient(to right, #c0392b,#e74c3c,#e67e22);
+      .mixinTitle {
+        font-size: 148px;
         color: transparent;
         background-clip: text;
-        font-size: 48px;
         font-weight: 200;
+      }
+      .title {
+        background-image: linear-gradient(to right bottom, #ffa801,#f7f1e3);
+        .mixinTitle;
         animation-name: backColor;
-        animation-duration: 1.6s;
+        animation-duration: 2s;
         animation-timing-function: linear;
         animation-iteration-count: infinite;
         animation-direction: alternate;
-        animation-fill-mode: backwards;
       }
+
       @keyframes backColor {
         25% {
-          background: linear-gradient(to right, #e67e22,#9b59b6,#8e44ad);
-          color: transparent;
-          font-size: 48px;
-          background-clip: text;
-          font-weight: 200;
+          background-image: linear-gradient(to right bottom,#ff3f34,pink);
+          .mixinTitle;
         }
         75% {
-          background: linear-gradient(to right,#8e44ad,#9b59b6,#e67e22);
-          color: transparent;
-          font-size: 48px;
-          background-clip: text;
-          font-weight: 200;
+          background-image: linear-gradient(to right bottom,#2c2c54,#D6A2E8);
+          .mixinTitle;
         }
       }
     }
