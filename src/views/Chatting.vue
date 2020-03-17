@@ -7,7 +7,7 @@
         <message :isMe="true" :msg="test+'x上飞机为飞机就发我附件为if将诶覅忘记发我if'"></message>
         <message :msg="test"></message>
         <message :msg="test"></message>
-        <message :isMe="true" :msg="test+'x上飞机为飞机就发我附件为if将诶覅忘记发我if'"></message>
+        <message :isMe="true" :msg="test+'x上飞机为飞机就发我附件为if将诶覅忘我附件为if将诶覅忘记发我附件为if将诶覅忘记发我附件为if将诶覅忘记发记发我if'"></message>
         <message :msg="test"></message>
       </room>
       <list class="online-list"></list>
@@ -40,11 +40,9 @@ export default {
   }
   main {
     height: 92vh;
-    border: 1px solid grey;
     display: flex;
     .room {
       flex: 3;
-      background: pink;
     }
     .online-list {
       flex: 1;

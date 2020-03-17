@@ -1,6 +1,6 @@
 <template>
   <div id="message" :style="{flexDirection: isMe ? 'row-reverse': 'row',alignItems: !isMe ? 'flex-end': 'flex-start'}">
-    <div class="avatar"></div>
+    <div class="avatar" :style="{background: user.color}">{{user.nickname[0]}}</div>
     <div class="bubble" v-if="!isMe">
       <div class="after">
         {{msg}}
@@ -17,14 +17,16 @@
 export default {
   props: {
     isMe: {type: Boolean, default: false},
-    msg: {type: String, required: true}
+    msg: {type: String, required: true},
+    user: {type: Object, default: () => ({nickname: 'S', color: 'pink'})}
   }
 }
 </script>
 <style lang="less" scoped>
 @r: 6px;
 @avatar-r: 44px;
-@bub-color: #6ab04c;
+@bub-color: #fff;
+@main-color: #34495e;
 #message {
   display: flex;
   height: auto;
@@ -33,8 +35,12 @@ export default {
     width: @avatar-r;
     height: @avatar-r;
     border-radius: 50%;
-    border: 1px solid grey;
+    border: 1px solid @main-color;
     order: 1;
+    background: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .bubble {
     order: 2;
@@ -53,7 +59,7 @@ export default {
     }
     .after {
       content: "";
-      color: #fff;
+      color: @main-color;
       display: block;
       min-width: 80px;
       max-width: 400px;
