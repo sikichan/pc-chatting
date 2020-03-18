@@ -5,6 +5,12 @@
       <div class="form">
         <input v-model="nickname" placeholder="Enter your nickname">
         <button @click="onStart">Start</button>
+        <transition name="fade">
+          <div class="tips" v-show="tipShow">
+            <span class="iconfont icon-ico-tips icon-size"></span>
+            <span>{{tips}}</span>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -13,17 +19,42 @@
 export default {
   data() {
     return {
-      nickname: ''
+      nickname: '',
+      tipShow: false,
+      tips: ''
     }
   },
   methods: {
+    randomColor() {
+      const r = Math.floor(Math.random()*255)
+      const g = Math.floor(Math.random()*255)
+      const b = Math.floor(Math.random()*255)
+      return 'rgba('+ r +','+ g +','+ b +',0.8)'
+    },
     onStart() {
-      this.$router.push({path: '/chatting'})
+      this.nickname = this.nickname.trim()
+      if (this.nickname === '') {
+        this.tips = '昵称不能为空'
+        this.tipShow = true
+        return
+      }
+      this.tipShow = false
+      sessionStorage.setItem('chat-user', this.nickname)
+      sessionStorage.setItem('chat-user-color', this.randomColor())
+      setTimeout(() => {
+        this.$router.push({path: '/chatting'})
+      }, 500)
     }
   }
 }
 </script>
 <style lang="less" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
   #home {
     height: 100vh;
     display: flex;
@@ -36,6 +67,18 @@ export default {
       justify-content: space-around;
       align-items: center;
       .form {
+        .tips {
+          height: 46px;
+          position: absolute;
+          display: flex;
+          align-items: center;
+          .icon-size {
+            font-size: 24px;
+          }
+          span {
+            color:#833471;
+          }
+        }
         input {
           padding: 10px;
           font-size: 16px;

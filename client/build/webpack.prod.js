@@ -1,10 +1,11 @@
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.js')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
+const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin')
 module.exports = merge(baseConfig, {
   mode: 'production',
-  devtool: 'source-map',
+  // devtool: 'source-map',
   output: {
     filename: 'js/[name].[contenthash:6].js',
     path: path.resolve(__dirname, '../dist')
@@ -16,6 +17,8 @@ module.exports = merge(baseConfig, {
     runtimeChunk: {
       name: entrypoint => `runtime~${entrypoint.name}`
     },
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
   module: {
     rules: [

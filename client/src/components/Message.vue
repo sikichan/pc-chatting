@@ -1,14 +1,14 @@
 <template>
-  <div id="message" :style="{flexDirection: isMe ? 'row-reverse': 'row',alignItems: !isMe ? 'flex-end': 'flex-start'}">
-    <div class="avatar" :style="{background: user.color}">{{user.nickname[0]}}</div>
-    <div class="bubble" v-if="!isMe">
+  <div id="message" :style="{flexDirection: user.isMe ? 'row-reverse': 'row',alignItems: !user.isMe ? 'flex-end': 'flex-start'}">
+    <div class="avatar" :style="{background: user.color}">{{user.nickname}}</div>
+    <div class="bubble" v-if="!user.isMe">
       <div class="after">
-        {{msg}}
+        {{user.msg}}
       </div>
     </div>
     <div class="right-bubble" v-else>
       <div class="before">
-        {{msg}}
+        {{user.msg}}
       </div>
     </div>
   </div>
@@ -16,9 +16,8 @@
 <script>
 export default {
   props: {
-    isMe: {type: Boolean, default: false},
-    msg: {type: String, required: true},
-    user: {type: Object, default: () => ({nickname: 'S', color: 'pink'})}
+    // isMe: {type: Boolean, default: false},
+    user: {type: Object, default: () => ({isMe: false, msg: 'xx', nickname: 'S', color: 'pink'})}
   }
 }
 </script>
@@ -61,7 +60,7 @@ export default {
       content: "";
       color: @main-color;
       display: block;
-      min-width: 80px;
+      min-width: 50px;
       max-width: 400px;
       border-radius: 6px;
       background: @bub-color;

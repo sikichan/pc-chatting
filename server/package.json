@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "npx nodemon server.js"
+  },
+  "dependencies": {
+    "koa": "^2.11.0",
+    "lodash": "^4.17.15",
+    "ws": "^7.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

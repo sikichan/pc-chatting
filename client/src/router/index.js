@@ -13,8 +13,23 @@ const router = new VueRouter({
     {
       path: '/chatting',
       name: 'chatting',
-      component: Chatting
+      component: Chatting,
+      meta: { requiresAuth: true }
     }
   ]
+})
+
+router.beforeEach((to, from ,next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!sessionStorage.getItem('chat-user')) {
+      next({
+        path: '/'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 export default router

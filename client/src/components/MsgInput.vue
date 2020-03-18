@@ -5,13 +5,13 @@
     </div>
     <VEmojiPicker @select="selectEmoji" v-show="showEmoji" class="emoji"/>
     <div class="handle">
-      <span class="iconfont icon-emoji icon-size" @click="handleShowEmoji"></span>
+      <span>Ctrl+Enter 发送</span>
       <button @click="send">发 送</button>
+      <span class="iconfont icon-emoji icon-size" @click="handleShowEmoji"></span>
     </div>
   </div>
 </template>
 <script>
-import VEmojiPicker from 'v-emoji-picker'
 export default {
   data() {
     return {
@@ -36,17 +36,20 @@ export default {
         return
       } 
       console.log(this.input)
+      this.$emit('data', this.input)
       this.input = ''
     }
   },
   components: {
-    VEmojiPicker
+    VEmojiPicker: () => import('v-emoji-picker')
   }
 }
 </script>
 <style lang="less" scoped>
 @main-color:#34495e;
 #msg-input {
+  // display: flex;
+  // flex-direction: column;
   .emoji {
     width: 100%;
     height: 300px;
@@ -74,19 +77,23 @@ export default {
   }
   .handle {
     box-shadow: -2px -2px 2px #eeeeee;
-    padding: 8px 14px;
-    display: flex;
-    justify-content: flex-end;
+    padding: 10px 20px;
+    bottom: 0;
+    & span:first-child {
+      font-size: 14px;
+    }
     .icon-size {
       font-size: 26px;
+      float: right;
+      margin-right: 20px;
     }
     button {
-      margin-left: 30px;
       font-size: 14px;
-      padding: 3px 10px;
+      padding: 5px 10px;
       border-radius: 5px;
       color: #fff;
       background: @main-color;
+      float: right;
     }
   }
 }
