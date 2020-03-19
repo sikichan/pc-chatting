@@ -14,72 +14,34 @@ export default {
       showEmoji: false,
       users: [],
       list: '',
-      socket: null
     }
   },
   created() {
-    this.getSocket()
   },
   mounted() {
     this.list = document.querySelector('.list')
+    import('../utils/socketio.js').then(({login}) => {
+      login({
+        userId: sessionStorage.getItem('chat-user'),
+        color: sessionStorage.getItem('chat-user-color'),
+        nickname: sessionStorage.getItem('chat-user-name')
+      })
+    })
   },
   components: {
     message: () => import('../components/Message.vue'),
     MsgInput: () => import('../components/MsgInput.vue')
   },
   methods: {
-    getSocket() {
-      const socket = new WebSocket('ws://localhost:8080')
-      socket.addEventListener('open', (event) => {
-        socket.send(
-          JSON.stringify({type: 'connect', data: {
-            nickname: sessionStorage.getItem('chat-user'),
-            color: sessionStorage.getItem('chat-user-color')}
-          })
-        )
-      })
-      socket.addEventListener('close', () => {
-        console.log('socket 连接断开，正在尝试重新建立连接')
-        this.getSocket()
-      })
-      socket.onerror = (event) => {
-        console.log('onerror', event)
-      }
-      socket.addEventListener('message', (event) => {
-        if (event.data) {
-          let data = JSON.parse(event.data)
-          if (data.type === 'size') {
-            this.$emit('online-count', data.size)
-          } else if (data.type === 'connect') {
-            console.log('conn', data)
-            const {onlineList} = data
-            this.$emit('online-list', onlineList)
-            console.log(onlineList)
-          } else {
-            const {msg, nickname, color} = data
-            this.users.push({
-              msg, nickname, 
-              isMe: nickname === sessionStorage.getItem('chat-user') ? true: false, 
-              color
-            })
-          }
-        }
-      })
-      this.socket = socket
-    },
     sendData(data) {
       let msgData = {
-        type: 'data',
         msg: data,
         nickname: sessionStorage.getItem('chat-user'),
         color: sessionStorage.getItem('chat-user-color')
       }
-      console.log(this.list.scrollHeight)
       this.$nextTick(() => {
         this.list.scrollTop = this.list.scrollHeight
       })
-      console.log(this.socket)
-      this.socket.send(JSON.stringify(msgData))
     },
   },
 }

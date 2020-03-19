@@ -21,7 +21,7 @@ export default {
     return {
       nickname: '',
       tipShow: false,
-      tips: ''
+      tips: '',
     }
   },
   methods: {
@@ -39,7 +39,8 @@ export default {
         return
       }
       this.tipShow = false
-      sessionStorage.setItem('chat-user', this.nickname)
+      sessionStorage.setItem('chat-user', Date.now() + this.nickname)
+      sessionStorage.setItem('chat-user-name', this.nickname)
       sessionStorage.setItem('chat-user-color', this.randomColor())
       setTimeout(() => {
         this.$router.push({path: '/chatting'})

@@ -2,21 +2,32 @@
   <div id="chatting">
     <!-- <header>聊天室</header> -->
     <main>
-      <room class="room" @online-count="getOnlineCount" @online-list="getOnlineList"/>
-        
-      <list class="online-list" :count="onlineCount" :list="onlineList"/>
+      <room class="room" @online-count="getOnlineCount"/>
+      <list class="online-list" :list="onlineList"/>
     </main>
+    <!-- <div class="mask">
+      <room class="room" @online-count="getOnlineCount"/>
+    </div>
+    <div class="pri-chat">
+    </div> -->
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      onlineCount: 0,
-      onlineList: []
+      onlineList: [],
+      privateChat: false
+
     }
   },
   mounted() {
+    import('../utils/socketio.js').then(({socket}) => {
+      socket.on('online', (data) => {
+        console.log('online: ', data.online[0])
+        this.onlineList = data.online
+      })
+    })
   },
   methods: {
     getOnlineCount(count) {
@@ -30,28 +41,35 @@ export default {
     room: () => import('../components/Room.vue'),
     list: () => import('../components/OnlineList.vue'),
   },
-  beforeRouteLeave (to, from, next) {
-    let flag = window.confirm('离开当前页面，聊天记录就没了哦')
-    if (!flag) return next({path: '/chatting'})
-    next()
-  },
 }
 </script>
 <style lang="less" scoped>
 #chatting {
   height: 100vh;
-  // border: 1px solid orange;
   display: flex;
   flex-direction: column;
   main {
     display: flex;
     height: 100%;
     .room {
-      flex: 3;
+      flex: 7;
     }
     .online-list {
-      flex: 1;
+      flex: 3;
     }
+  }
+  .mask {
+    background: #000;
+    opacity: 0.5;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+  }
+  .pri-chat {
+    position: absolute;
+    z-index: 3;
+    width: 100vw;
+    height: 100%
   }
 }
   

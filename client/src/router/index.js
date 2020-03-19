@@ -8,7 +8,8 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {requiresChat: true}
     },
     {
       path: '/chatting',
@@ -25,6 +26,12 @@ router.beforeEach((to, from ,next) => {
       next({
         path: '/'
       })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresChat)) {
+    if (sessionStorage.getItem('chat-user')) {
+      next({path: '/chatting'})
     } else {
       next()
     }
