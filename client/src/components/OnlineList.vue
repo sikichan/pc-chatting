@@ -37,15 +37,15 @@ export default {
       let atUserId = e.target.attributes.getNamedItem('data-userid').value
       let atSocketId = e.target.attributes.getNamedItem('data-socketid').value
       if (atUserId === this.selfUserId) return
-      import('../utils/socketio.js').then(({getPrivateChat, socket}) => {
-        getPrivateChat({atSocketId})
-        socket.on('chatting', (data) => {
-          console.log('new chat: ', data)
-          if (data) {
+      // import('../utils/socketio.js').then(({getPrivateChat, socket}) => {
+      //   getPrivateChat({atSocketId})
+      //   socket.on('chatting', (data) => {
+      //     console.log('new chat: ', data)
+      //     if (data) {
 
-          }
-        })
-      })
+      //     }
+      //   })
+      // })
 
     }
   }

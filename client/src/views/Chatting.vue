@@ -5,11 +5,6 @@
       <room class="room" @online-count="getOnlineCount"/>
       <list class="online-list" :list="onlineList"/>
     </main>
-    <!-- <div class="mask">
-      <room class="room" @online-count="getOnlineCount"/>
-    </div>
-    <div class="pri-chat">
-    </div> -->
   </div>
 </template>
 <script>
@@ -57,19 +52,6 @@ export default {
     .online-list {
       flex: 3;
     }
-  }
-  .mask {
-    background: #000;
-    opacity: 0.5;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-  }
-  .pri-chat {
-    position: absolute;
-    z-index: 3;
-    width: 100vw;
-    height: 100%
   }
 }
   

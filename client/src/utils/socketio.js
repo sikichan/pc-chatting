@@ -18,7 +18,10 @@ const getPrivateChat = (data) => {
   socket.emit('private', data)
 }
 
+const groupChat = (data) => {
+  socket.emit('group-chat', data)
+}
 export {
   login, logout, socket, io,
-  getPrivateChat
+  getPrivateChat,groupChat
 }
