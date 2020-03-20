@@ -2,7 +2,10 @@
   <div id="chatting">
     <!-- <header>聊天室</header> -->
     <main>
-      <room class="room" @online-count="getOnlineCount"/>
+      <!-- <room class="room" @online-count="getOnlineCount"/> -->
+      <div class="room">
+        <router-view/>
+      </div>
       <list class="online-list" :list="onlineList"/>
     </main>
   </div>
@@ -36,6 +39,10 @@ export default {
     room: () => import('../components/Room.vue'),
     list: () => import('../components/OnlineList.vue'),
   },
+    beforeRouteUpdate(to, from , next) {
+    console.log('dsffs')
+    next()
+  }
 }
 </script>
 <style lang="less" scoped>

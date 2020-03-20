@@ -31,12 +31,16 @@ export default {
       })
       this.$router.go(-1)
     },
+    // 发起私聊
     atTa(e) {
+      this.$router.push({name: 'private'})
+    },
+    atTas(e) {
       // e.target.attributes 属性节点 Attr 对象的集合（NamedNodeMap）
       // console.log(e.target.attributes['data-userid'].value)
-      let atUserId = e.target.attributes.getNamedItem('data-userid').value
-      let atSocketId = e.target.attributes.getNamedItem('data-socketid').value
-      if (atUserId === this.selfUserId) return
+      // let atUserId = e.target.attributes.getNamedItem('data-userid').value
+      // let atSocketId = e.target.attributes.getNamedItem('data-socketid').value
+      // if (atUserId === this.selfUserId) return
       // import('../utils/socketio.js').then(({getPrivateChat, socket}) => {
       //   getPrivateChat({atSocketId})
       //   socket.on('chatting', (data) => {

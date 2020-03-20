@@ -11,7 +11,7 @@
 import {groupChat, socket, login} from '../utils/socketio.js'
 export default {
   props: {
-    title: {type: String, default: '群聊'}
+    title: {type: String, default: 'private'}
   },
   data() {
     return {
@@ -31,7 +31,7 @@ export default {
     })
     // 接送群聊消息
     socket.on('group-chat-all', (data) => {
-      console.log('room::', data)
+      console.log('private;:', data)
       Object.assign(data, {isMe: data.userId === sessionStorage.getItem('chat-user')})
       this.users.push(data)
       // 控制滚动条滚到最新的一条消息

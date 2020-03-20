@@ -3,8 +3,14 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import Home from '../views/Home.vue'
 const Chatting = () => import(/*webpackChunkName: 'Chatting'*/'../views/Chatting.vue')
+const Room = () => import(/*webpackChunkName: 'Room'*/'../components/Room.vue')
+const PrivateRoom = () => import(/*webpackChunkName: 'PrivateRoom'*/'../components/PrivateRoom.vue')
 const router = new VueRouter({
   routes: [
+    {
+      path: '*',
+      redirect: '/'
+    },
     {
       path: '/',
       name: 'home',
@@ -13,10 +19,21 @@ const router = new VueRouter({
     },
     {
       path: '/chatting',
-      name: 'chatting',
       component: Chatting,
-      meta: { requiresAuth: true }
-    }
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '/',
+          component: Room
+        },
+        {
+          path: 'private',
+          name: 'private',
+          component: PrivateRoom
+        }
+      ]
+    },
+    
   ]
 })
 
