@@ -13,6 +13,7 @@
   </div>
 </template>
 <script>
+import {socket} from '../utils/socketio.js'
 export default {
   props: {
     list: {type: Array, default: () => ([])},
@@ -23,6 +24,9 @@ export default {
     }
   },
   mounted() {
+    socket.on('private-msg', (data) => {
+      console.log('私聊22：', data)
+    })
   },
   methods: {
     logout() {
@@ -33,7 +37,10 @@ export default {
     },
     // 发起私聊
     atTa(e) {
-      this.$router.push({name: 'private'})
+      let atSocketId = e.target.attributes.getNamedItem('data-socketid').value
+      this.$router.push({name: 'private', query: {
+        asid: atSocketId
+      }})
     },
     atTas(e) {
       // e.target.attributes 属性节点 Attr 对象的集合（NamedNodeMap）

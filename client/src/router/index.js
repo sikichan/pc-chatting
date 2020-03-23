@@ -23,7 +23,8 @@ const router = new VueRouter({
       meta: { requiresAuth: true },
       children: [
         {
-          path: '/',
+          path: 'group',
+          name: 'group',
           component: Room
         },
         {
@@ -48,7 +49,7 @@ router.beforeEach((to, from ,next) => {
     }
   } else if (to.matched.some(record => record.meta.requiresChat)) {
     if (sessionStorage.getItem('chat-user')) {
-      next({path: '/chatting'})
+      next({path: '/chatting/group'})
     } else {
       next()
     }

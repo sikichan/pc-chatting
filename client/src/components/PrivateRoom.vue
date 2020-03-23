@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import {groupChat, socket, login} from '../utils/socketio.js'
+import {groupChat, socket, login, privateChat} from '../utils/socketio.js'
 export default {
   props: {
     title: {type: String, default: 'private'}
@@ -29,16 +29,22 @@ export default {
       color: sessionStorage.getItem('chat-user-color'),
       nickname: sessionStorage.getItem('chat-user-name')
     })
-    // 接送群聊消息
-    socket.on('group-chat-all', (data) => {
-      console.log('private;:', data)
-      Object.assign(data, {isMe: data.userId === sessionStorage.getItem('chat-user')})
-      this.users.push(data)
-      // 控制滚动条滚到最新的一条消息
-      this.$nextTick(() => {
-        this.list.scrollTop = this.list.scrollHeight
-      })
+    socket.on('private-msg', (data) => {
+      console.log('私聊：', data)
     })
+    // createPrivate({atSocketId: this.$route.query.asid})
+
+
+    // 接送群聊消息
+    // socket.on('group-chat-all', (data) => {
+    //   console.log('private;:', data)
+    //   Object.assign(data, {isMe: data.userId === sessionStorage.getItem('chat-user')})
+    //   this.users.push(data)
+    //   // 控制滚动条滚到最新的一条消息
+    //   this.$nextTick(() => {
+    //     this.list.scrollTop = this.list.scrollHeight
+    //   })
+    // })
 },
   components: {
     message: () => import('../components/Message.vue'),
@@ -48,12 +54,15 @@ export default {
     // 发送群聊消息
     sendData(msg) {
       let msgData = {
-        msg,
-        nickname: sessionStorage.getItem('chat-user-name'),
-        userId: sessionStorage.getItem('chat-user'),
-        color: sessionStorage.getItem('chat-user-color')
+        atSocketId: this.$route.query.asid,
+        data: {
+          msg,
+          nickname: sessionStorage.getItem('chat-user-name'),
+          userId: sessionStorage.getItem('chat-user'),
+          color: sessionStorage.getItem('chat-user-color')
+        }
       }
-      groupChat(msgData)
+      privateChat(msgData)
     },
   },
 }

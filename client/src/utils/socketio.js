@@ -1,7 +1,16 @@
 const io = require('socket.io-client')
 const socket = io.connect('http://localhost:8080')
 
-const login = (data) => {
+socket.disconnect = function() {
+  socket.emit('disconnect')
+}
+
+const login = () => {
+  const data = {
+    userId: sessionStorage.getItem('chat-user'),
+    color: sessionStorage.getItem('chat-user-color'),
+    nickname: sessionStorage.getItem('chat-user-name')
+  }
    socket.emit('login', data)
 }
 const logout = () => {
@@ -14,8 +23,8 @@ const logout = () => {
 }
 
 // 私聊
-const getPrivateChat = (data) => {
-  socket.emit('private', data)
+const privateChat = (data) => {
+  socket.emit('private-chat', data)
 }
 
 const groupChat = (data) => {
@@ -23,5 +32,5 @@ const groupChat = (data) => {
 }
 export {
   login, logout, socket, io,
-  getPrivateChat,groupChat
+  privateChat,groupChat
 }

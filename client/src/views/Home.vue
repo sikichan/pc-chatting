@@ -43,7 +43,7 @@ export default {
       sessionStorage.setItem('chat-user-name', this.nickname)
       sessionStorage.setItem('chat-user-color', this.randomColor())
       setTimeout(() => {
-        this.$router.push({path: '/chatting'})
+        this.$router.push({name: 'group'})
       }, 500)
     }
   }

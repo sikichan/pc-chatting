@@ -24,11 +24,6 @@ export default {
   },
   mounted() {
     this.list = document.querySelector('.list')
-    login({
-      userId: sessionStorage.getItem('chat-user'),
-      color: sessionStorage.getItem('chat-user-color'),
-      nickname: sessionStorage.getItem('chat-user-name')
-    })
     // 接送群聊消息
     socket.on('group-chat-all', (data) => {
       console.log('room::', data)
