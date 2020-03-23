@@ -76,7 +76,7 @@ export default {
     }
   }
   .handle {
-    box-shadow: -2px -2px 2px #eeeeee;
+    box-shadow: 0px 1px 2px #eeeeee;
     padding: 10px 20px;
     bottom: 0;
     & span:first-child {

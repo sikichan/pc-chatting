@@ -1,6 +1,6 @@
 <template>
   <div id="message" :style="{flexDirection: user.isMe ? 'row-reverse': 'row',alignItems: !user.isMe ? 'flex-end': 'flex-start'}">
-    <div class="avatar" :style="{background: user.color}">{{user.nickname}}</div>
+    <div class="avatar" :style="{background: user.color}">{{user.nickname[0]}}</div>
     <div class="bubble" v-if="!user.isMe">
       <div class="after">
         {{user.msg}}

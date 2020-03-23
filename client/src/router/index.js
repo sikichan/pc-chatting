@@ -3,19 +3,38 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import Home from '../views/Home.vue'
 const Chatting = () => import(/*webpackChunkName: 'Chatting'*/'../views/Chatting.vue')
+const Room = () => import(/*webpackChunkName: 'Room'*/'../components/Room.vue')
+const PrivateRoom = () => import(/*webpackChunkName: 'PrivateRoom'*/'../components/PrivateRoom.vue')
 const router = new VueRouter({
   routes: [
     {
+      path: '*',
+      redirect: '/'
+    },
+    {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {requiresChat: true}
     },
     {
       path: '/chatting',
-      name: 'chatting',
       component: Chatting,
-      meta: { requiresAuth: true }
-    }
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: 'group',
+          name: 'group',
+          component: Room
+        },
+        {
+          path: 'private',
+          name: 'private',
+          component: PrivateRoom
+        }
+      ]
+    },
+    
   ]
 })
 
@@ -25,6 +44,12 @@ router.beforeEach((to, from ,next) => {
       next({
         path: '/'
       })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresChat)) {
+    if (sessionStorage.getItem('chat-user')) {
+      next({path: '/chatting/group'})
     } else {
       next()
     }
